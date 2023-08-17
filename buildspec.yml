@@ -25,10 +25,10 @@ phases:
       - echo "Building the Docker image..."
       - docker build -t webapp .
       - docker tag webapp:latest 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:latest
-      - docker tag webapp:latest 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:$COMMIT_ID
+      # - docker tag webapp:latest 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:$COMMIT_ID
 
   post_build:
     commands:
       - echo "Pushing the Docker image..."
       - docker push 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:latest
-      - docker push 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:$COMMIT_ID
+      # - docker push 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:$COMMIT_ID
