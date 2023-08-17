@@ -23,12 +23,12 @@ phases:
   build:
     commands:
       - echo "Building the Docker image..."
-      - docker build -t webapp .
-      - docker tag webapp:latest 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:latest
-      # - docker tag webapp:latest 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:$COMMIT_ID
+      - docker build -t $ECR_REPO_NAME:$ECR_IMAGE_TAG .
+      - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG
+      - docker tag $ECR_REPO_NAME:$ECR_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPO_NAME:$COMMIT_ID
 
   post_build:
     commands:
       - echo "Pushing the Docker image..."
-      - docker push 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:latest
-      # - docker push 199042988758.dkr.ecr.ap-south-1.amazonaws.com/webapp:$COMMIT_ID
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPO_NAME:$ECR_IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPO_NAME:$COMMIT_ID
